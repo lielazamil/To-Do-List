@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">My Todo List</h2>
+        <div class="input-group mb-3">
+            <input
+            type="text"
+            id="taskinput"
+            class="form-control"
+            placeholder="enter your tasks"
+            />
+<button id="addbtn" class="btn btn-secondary">Add</button>
+        </div>
+<p>Total tasks: <span id="count">0</span></p>
+<ul id="tasklist"class='list-group'></ul>
+<button id="clearAll"class="btn btn-danger mt-3">clearAll</button>
+    </div>
+
+<script>
+$(document).ready(function(){
+    let count=0;
+    $("#addbtn").click(function(){
+        let task=$("#taskinput").val();
+        if(task!==""){
+        $("#tasklist").append(`<li class="list-group-item d-flex justify-content-between align-items-center"><span>${task}</span><div>
+      <button class="done btn btn-success btn-sm">Done</button>
+      <button class="delete btn btn-danger btn-sm">Delete</button>
+      </div>
+      </li> <br>`,
+    );
+    
+    $('#taskinput').val("");
+    count++;
+    $("#count").text(count);
+    
+
+      }
+})
+$(document).on("click",".done",function(){
+  $(this).closest('li').toggleClass('list-group-item-success');
+})
+$(document).on("click",".delete",function(){
+  $(this).closest('li').remove();
+  count--;
+  $("#count").text(count);
+})
+$("#clearAll").click(function(){
+   $('#tasklist').empty();
+   count= 0;
+   $("#count").text(count);
+})
+})
+
+
+</script>
+
+
+</body>
+</html>
